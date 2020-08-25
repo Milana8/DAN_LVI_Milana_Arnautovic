@@ -11,11 +11,12 @@ namespace Zadatak_1
 {
     class Program
     {
+        static string choice;
         static void Main(string[] args)
         {
 
             Console.WriteLine("*****WELCOME*****");
-            bool getSrc = true;
+            bool run = true;
             do
             {
                 WebClient client = new WebClient();
@@ -64,20 +65,49 @@ namespace Zadatak_1
 
 
                 Console.WriteLine("\nDo you want to download html source code of another website?");
-                Console.WriteLine("Type yes or 1 to continue");
+
+                Console.WriteLine("Type yes or 1 to download");
                 Console.WriteLine("Type no or 2 to exit");
-                string choice = Console.ReadLine();
+                Console.WriteLine("If you want to zip the downloaded files, type the zip");
+                 choice = Console.ReadLine();
                 if (choice == "yes" || choice == "1")
-                    getSrc = true;
+                {
+                    run = true;
+                }
+                   
                 
                 else if (choice == "no" || choice == "2")
-                    getSrc = false;
+                {
+                    run = false;
+                }
+                    
+                else if (choice == "zip")
+                {
+                    File.Delete(@"..\..\ZIP.zip");
+                    ZipFile.CreateFromDirectory(@"..\\..\\html\\", @"..\..\ZIP.zip");
+                    Console.WriteLine("\nFiles are zipped\n");
+                    Console.WriteLine("\nDo you want to download html source code of another website?");
+                    Console.WriteLine("Type yes or 1 to download");
+                    Console.WriteLine("Type no or 2 to exit");
+                     choice = Console.ReadLine();
+                    if (choice == "yes" || choice == "1")
+                    {
+                        run = true;
+                    }
+
+
+                    else if (choice == "no" || choice == "2")
+                    {
+                        run = false;
+                    }
+
+                }
 
                 else
                     Console.WriteLine("Enter a valid choice");
 
             }
-            while (getSrc);
+            while (run);
             Console.WriteLine("***Goodbye***");
 
 
