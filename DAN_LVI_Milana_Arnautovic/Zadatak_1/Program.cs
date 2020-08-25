@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Zadatak_1
 {
+    /// <summary>
+    /// Download html source code and zip files
+    /// </summary>
     class Program
     {
         static string choice;
@@ -32,12 +35,14 @@ namespace Zadatak_1
                 Console.WriteLine("Downloading...\nPlease wait");
                 try
                 {
-                    string reply = client.DownloadString($"{protocol}://www.{url}");
+                    string reply = client.DownloadString($"{protocol}://www.{url}"); //download html source code
                     Console.WriteLine("Downloaded Successfully...\n");
                     string tl = @"..\\..\\html\\";
                     Console.WriteLine("\nThe file will save in .html format");
                     Console.Write("Enter filename: ");
-                    string fn = Console.ReadLine();
+                    string fn = Console.ReadLine(); //file name
+                     
+                    //file name must not be left blank
                     bool fne = true;
                     do
                     {
@@ -65,12 +70,11 @@ namespace Zadatak_1
 
 
                 Console.WriteLine("\nDo you want to download html source code of another website?");
-
                 Console.WriteLine("Type yes or 1 to download");
                 Console.WriteLine("Type no or 2 to exit");
                 Console.WriteLine("If you want to zip the downloaded files, type the zip");
                  choice = Console.ReadLine();
-                if (choice == "yes" || choice == "1")
+                if (choice == "yes" || choice == "1") //download html source code again
                 {
                     run = true;
                 }
@@ -81,7 +85,7 @@ namespace Zadatak_1
                     run = false;
                 }
                     
-                else if (choice == "zip")
+                else if (choice == "zip") //zip files
                 {
                     File.Delete(@"..\..\ZIP.zip");
                     ZipFile.CreateFromDirectory(@"..\\..\\html\\", @"..\..\ZIP.zip");
